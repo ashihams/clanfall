@@ -1,9 +1,5 @@
 import pygame
 
-from asset_runtime import bootstrap_pygame_assets
-
-bootstrap_pygame_assets()
-
 # define some colors (R, G, B)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
