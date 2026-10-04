@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clanfall — Match Passport & Audit Dashboard</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>CLANFALL MATCH PASSPORT</h1>
+      <span class="tag">verifiable social deduction audit · commit-reveal ledger · memory evidence engine</span>
+    </div>
+    <div id="health" class="badges"></div>
+  </header>
+
+  <main>
+    <div class="col">
+      <div class="panel">
+        <h2>Match Summary</h2>
+        <div id="match-summary">
+          <p class="muted">No match completed yet. Play a match or view audit data.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Hyper3D Outcome Sigil</h2>
+        <div id="sigil-container" class="sigil-box">
+          <img id="outcome-sigil" src="/assets/sigils/crew_victory.svg" alt="Outcome Sigil" class="sigil-img hidden">
+          <p id="sigil-caption" class="muted">Sigil generated upon match finalization.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col wide">
+      <div class="panel grow">
+        <h2>Role Commit-Reveal Verification Table</h2>
+        <table id="commit-table">
+          <thead>
+            <tr>
+              <th>Seat</th>
+              <th>Player</th>
+              <th>Role</th>
+              <th>Commitment (On-Chain)</th>
+              <th>Verified</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="5" class="muted">Waiting for match data...</td></tr>
+          </tbody>
+        </table>
+        <div id="tx-links" class="mono small"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Live Event Stream (Audit Feed)</h2>
+        <ol id="event-feed"></ol>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="panel">
+        <h2>Event-Log Hash Commitment</h2>
+        <div id="log-hash" class="mono small">
+          <p class="muted">Not committed yet</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Surfaced Memory Evidence</h2>
+        <div id="evidence-panel">
+          <p class="muted">Evidence derived from episodic &amp; knowledge graph layers during meetings.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
