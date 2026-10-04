@@ -819,6 +819,15 @@ class Game:
         self.camera = Camera(self.map.width, self.map.height)
         self.draw_debug = False
         self.effect_sounds['start_game'].play()
+        # Initialize Clanfall match session & commit roles on MatchLedger
+        try:
+            player_name = getattr(self.player, 'player_colour', 'Red')
+            bot_names = [getattr(b, 'bot_colour', f'Bot_{i}') for i, b in enumerate(self.bots)]
+            players = [player_name] + bot_names
+            impostors = [player_name] if getattr(self.player, 'imposter', False) else [bot_names[0] if bot_names else 'Bot_0']
+            hooks.deal_roles(players, impostors)
+        except Exception:
+            pass
 
     # CLEAR ASTEROIDS FUNCTIONS
     def show_score(self, x, y):
@@ -1045,11 +1054,22 @@ class Game:
 
         self.playing = True
         self.player.imposter = True
+        self.mn_gameover_sent = False
 
         for b in self.bots:
             if b.bot_colour == self.player_colour:
                 b.kill()
                 break
+
+        # [CLANFALL] Deal roles for Freeplay match
+        try:
+            player_name = getattr(self.player, 'player_colour', 'Red')
+            bot_names = [getattr(b, 'bot_colour', b.type) for b in self.bots if b.alive()]
+            players = [player_name] + bot_names
+            impostors = [player_name]
+            hooks.deal_roles(players, impostors)
+        except Exception:
+            pass
 
         self.imposter_among_us_status = False
 
@@ -1081,6 +1101,9 @@ class Game:
             # If missions are completed then win or loss display
             # For crew mate
             if self.missions_done == 8:
+                if not getattr(self, 'mn_gameover_sent', False):
+                    self.mn_gameover_sent = True
+                    hooks.gameover("CREW", "tasks completed")
                 pg.mixer.music.stop()  # turn off background music
                 pg.mixer.Channel(0).stop()
                 for m in self.foot_sounds['footsteps']:
@@ -1099,6 +1122,10 @@ class Game:
             # For imposter
             # if imposter kills all the bots or reactor meltdown sabotage timer equals to 0 then imposter wins
             elif self.bot_count == 0 or (self.sabotagecritical == True and (self.sabotagecriticaltimer - self.sabotagecriticaltimer_start) > 20000):
+                if not getattr(self, 'mn_gameover_sent', False):
+                    self.mn_gameover_sent = True
+                    reason = "sabotage" if self.sabotagecritical else "all bots eliminated"
+                    hooks.gameover("IMPOSTOR", reason)
                 pg.mixer.music.stop()  # turn off background music
                 pg.mixer.Channel(0).stop()
                 for m in self.foot_sounds['footsteps']:
@@ -1690,6 +1717,7 @@ class Game:
                             self.bot1.alive_status = False
                             self.bot1.play_kill_count += 1
                             self.kill_timer_icon_status = True
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot1, 'bot_colour', 'bot1'))
                             # if time taken to cooldown for kill > 15, i.e time_to_kill = 0, means that now we can kill a bot, then again
                             # reset time_left_to_kill to 15 that will show time interval after, which we can again kill a bot.
                             self.time_left_to_kill = 15
@@ -1714,6 +1742,7 @@ class Game:
                             self.bot2.play_kill_count += 1
                             self.bot_killed += 1
                             self.bot_count -= 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot2, 'bot_colour', 'bot2'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1731,6 +1760,7 @@ class Game:
                             self.bot3.play_kill_count += 1
                             self.bot_killed += 1
                             self.bot_count -= 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot3, 'bot_colour', 'bot3'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1748,6 +1778,7 @@ class Game:
                             self.bot4.play_kill_count += 1
                             self.bot_killed += 1
                             self.bot_count -= 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot4, 'bot_colour', 'bot4'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1765,6 +1796,7 @@ class Game:
                             self.bot5.play_kill_count += 1
                             self.bot_killed += 1
                             self.bot_count -= 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot5, 'bot_colour', 'bot5'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1782,6 +1814,7 @@ class Game:
                             self.bot_count -= 1
                             self.bot6.alive_status = False
                             self.bot6.play_kill_count += 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot6, 'bot_colour', 'bot6'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1799,6 +1832,7 @@ class Game:
                             self.bot_count -= 1
                             self.bot7.alive_status = False
                             self.bot7.play_kill_count += 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot7, 'bot_colour', 'bot7'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1817,6 +1851,7 @@ class Game:
                             # self.bot1.image.blit(dead_imgs[i], (0,0))
                             self.bot8.alive_status = False
                             self.bot8.play_kill_count += 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot8, 'bot_colour', 'bot8'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1834,6 +1869,7 @@ class Game:
                             self.bot_count -= 1
                             self.bot9.alive_status = False
                             self.bot9.play_kill_count += 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot9, 'bot_colour', 'bot9'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
@@ -1851,6 +1887,7 @@ class Game:
                             self.bot_count -= 1
                             self.bot10.alive_status = False
                             self.bot10.play_kill_count += 1
+                            hooks.kill(getattr(self.player, 'player_colour', 'Red'), getattr(self.bot10, 'bot_colour', 'bot10'))
                             self.time_left_to_kill = 15
                             pygame.time.set_timer(self.kill_timer_event, 1000)
                             self.killcooldown_start = self.killcooldown
