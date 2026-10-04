@@ -14,28 +14,29 @@ class Board:
         self.width = width
         self.height = height
         self.game = game
-        self.intro_bg = pg.image.load("Assets/Images/Menu/back.png").convert_alpha()
-        self.intro_bg2 = pg.image.load("Assets/Images/Menu/back2.png").convert_alpha()
-        self.intro_title = pg.image.load("Assets/Images/Menu/title.png").convert_alpha()
-        self.intro_menu1 = pg.image.load("Assets/Images/Menu/freeplay.png").convert_alpha()
-        self.intro_menu2 = pg.image.load("Assets/Images/Menu/online.png").convert_alpha()
-        self.intro_menu3 = pg.image.load("Assets/Images/Menu/help.png").convert_alpha()
-        self.intro_menu4 = pg.image.load("Assets/Images/Menu/credits.png").convert_alpha()
-        self.intro_menu5 = pg.image.load("Assets/Images/Menu/quit.png").convert_alpha()
-        self.intro_color1 = pg.image.load("Assets/Images/Menu/blue.png").convert_alpha()
-        self.intro_color2 = pg.image.load("Assets/Images/Menu/green.png").convert_alpha()
-        self.intro_color3 = pg.image.load("Assets/Images/Menu/yellow.png").convert_alpha()
-        self.intro_color4 = pg.image.load("Assets/Images/Menu/red.png").convert_alpha()
-        self.intro_color5 = pg.image.load("Assets/Images/Menu/orange.png").convert_alpha()
-        self.intro_choosecolour = pg.image.load("Assets/Images/Menu/choosecolour.png").convert_alpha()
-        self.intro_return = pg.image.load("Assets/Images/Menu/return.png").convert_alpha()
-        self.intro_entername = pg.image.load("Assets/Images/Menu/entername.png").convert_alpha()
-        self.intro_enteraddress = pg.image.load("Assets/Images/Menu/enteraddress.png").convert_alpha()
-        self.intro_input = pg.image.load("Assets/Images/Menu/input.png").convert_alpha()
+        self.intro_bg = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/back.png").convert_alpha(), (width, height))
+        self.intro_bg2 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/back2.png").convert_alpha(), (width, height))
+        self.intro_title = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/title.png").convert_alpha(), (int(width / 2), int(height * 0.2)))
+        self.intro_menu1 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/freeplay.png").convert_alpha(), (int(width / 5), int(height * 0.1)))
+        self.intro_menu2 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/online.png").convert_alpha(), (int(width / 5), int(height * 0.1)))
+        self.intro_menu3 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/help.png").convert_alpha(), (int(width / 5), int(height * 0.1)))
+        self.intro_menu4 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/credits.png").convert_alpha(), (int(width / 5), int(height * 0.1)))
+        self.intro_menu5 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/quit.png").convert_alpha(), (int(width / 5), int(height * 0.1)))
+        self.intro_color1 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/blue.png").convert_alpha(), (int(width / 4), int(height * 0.1)))
+        self.intro_color2 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/green.png").convert_alpha(), (int(width / 4), int(height * 0.1)))
+        self.intro_color3 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/yellow.png").convert_alpha(), (int(width / 4), int(height * 0.1)))
+        self.intro_color4 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/red.png").convert_alpha(), (int(width / 4), int(height * 0.1)))
+        self.intro_color5 = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/orange.png").convert_alpha(), (int(width / 4), int(height * 0.1)))
+        self.intro_choosecolour = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/choosecolour.png").convert_alpha(), (int(width / 2), int(height * 0.1)))
+        self.intro_return = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/return.png").convert_alpha(), (int(width / 4), int(height * 0.1)))
+        self.intro_entername = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/entername.png").convert_alpha(), (int(width / 2), int(height * 0.1)))
+        self.intro_enteraddress = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/enteraddress.png").convert_alpha(), (int(width / 2), int(height * 0.1)))
+        self.intro_input = pg.transform.smoothscale(pg.image.load("Assets/Images/Menu/input.png").convert_alpha(), (int(width / 3), int(height * 0.2)))
         self.intro_help = []
         for i in range(0, 9):
-            self.intro_help.append(pygame.image.load('Assets/Images/help/'+'help'+str(i+1)+'.png'))
-        self.intro_credits = pg.image.load("Assets/Images/credits/credits.png")
+            img = pygame.image.load('Assets/Images/help/'+'help'+str(i+1)+'.png').convert_alpha()
+            self.intro_help.append(pg.transform.scale(img, (width, height)))
+        self.intro_credits = pg.transform.scale(pg.image.load("Assets/Images/credits/credits.png").convert_alpha(), (width, height))
         
         self.menu_font = pg.font.Font(FONT, 35)
         self.bonus_font = pg.font.Font(FONT, 30)
@@ -45,20 +46,13 @@ class Board:
 
     # Draw Main Menu - Intro Menu
     def draw_menu(self, *args):
-        self.intro_bg = pg.transform.smoothscale(self.intro_bg, (self.width, self.height))
-        self.surface.blit(self.intro_bg, (0, 0), (0, 0, self.width, self.height))
-        self.intro_title = pg.transform.smoothscale(self.intro_title, (int(self.width / 2), int(self.height * 0.2)))
-        self.surface.blit(self.intro_title, (self.width / 4, self.height * 0.1), (0, 0, self.width, self.height))
-        self.intro_menu1 = pg.transform.smoothscale(self.intro_menu1, (int(self.width / 5), int(self.height * 0.1)))
-        self.surface.blit(self.intro_menu1, (self.width / 2.5, self.height * 0.39), (0, 0, self.width, self.height))
-        self.intro_menu2 = pg.transform.smoothscale(self.intro_menu2, (int(self.width / 5), int(self.height * 0.1)))
-        self.surface.blit(self.intro_menu2, (self.width / 2.5, self.height * 0.51), (0, 0, self.width, self.height))
-        self.intro_menu3 = pg.transform.smoothscale(self.intro_menu3, (int(self.width / 5), int(self.height * 0.1)))
-        self.surface.blit(self.intro_menu3, (self.width / 2.5, self.height * 0.63), (0, 0, self.width, self.height))
-        self.intro_menu4 = pg.transform.smoothscale(self.intro_menu4, (int(self.width / 5), int(self.height * 0.1)))
-        self.surface.blit(self.intro_menu4, (self.width / 2.5, self.height * 0.75), (0, 0, self.width, self.height))
-        self.intro_menu5 = pg.transform.smoothscale(self.intro_menu5, (int(self.width / 5), int(self.height * 0.1)))
-        self.surface.blit(self.intro_menu5, (self.width / 2.5, self.height * 0.87), (0, 0, self.width, self.height))
+        self.surface.blit(self.intro_bg, (0, 0))
+        self.surface.blit(self.intro_title, (self.width / 4, self.height * 0.1))
+        self.surface.blit(self.intro_menu1, (self.width / 2.5, self.height * 0.39))
+        self.surface.blit(self.intro_menu2, (self.width / 2.5, self.height * 0.51))
+        self.surface.blit(self.intro_menu3, (self.width / 2.5, self.height * 0.63))
+        self.surface.blit(self.intro_menu4, (self.width / 2.5, self.height * 0.75))
+        self.surface.blit(self.intro_menu5, (self.width / 2.5, self.height * 0.87))
 
         for drawable in args:
             drawable.draw_on(self.surface)
@@ -68,22 +62,14 @@ class Board:
 
     # Draw Choose Color/Character Menu
     def draw_choose_character(self, *args):
-        self.intro_bg2 = pg.transform.smoothscale(self.intro_bg2, (self.width, self.height))
-        self.surface.blit(self.intro_bg2, (0, 0), (0, 0, self.width, self.height))
-        self.intro_choosecolour = pg.transform.smoothscale(self.intro_choosecolour, (int(self.width / 2), int(self.height * 0.1)))
-        self.surface.blit(self.intro_choosecolour, (self.width / 3.9, self.height * 0.05), (0, 0, self.width, self.height))
-        self.intro_color1 = pg.transform.smoothscale(self.intro_color1, (int(self.width / 4), int(self.height * 0.1)))
-        self.surface.blit(self.intro_color4, (self.width / 2.6, self.height * 0.2), (0, 0, self.width, self.height))
-        self.intro_color2 = pg.transform.smoothscale(self.intro_color2, (int(self.width / 4), int(self.height * 0.1)))
-        self.surface.blit(self.intro_color1, (self.width / 2.6, self.height * 0.33), (0, 0, self.width, self.height))
-        self.intro_color3 = pg.transform.smoothscale(self.intro_color3, (int(self.width / 4), int(self.height * 0.1)))
-        self.surface.blit(self.intro_color5, (self.width / 2.6, self.height * 0.46), (0, 0, self.width, self.height))
-        self.intro_color4 = pg.transform.smoothscale(self.intro_color4, (int(self.width / 4), int(self.height * 0.1)))
-        self.surface.blit(self.intro_color3, (self.width / 2.6, self.height * 0.59), (0, 0, self.width, self.height))
-        self.intro_color5 = pg.transform.smoothscale(self.intro_color5, (int(self.width / 4), int(self.height * 0.1)))
-        self.surface.blit(self.intro_color2, (self.width / 2.6, self.height * 0.72), (0, 0, self.width, self.height))
-        self.intro_return = pg.transform.smoothscale(self.intro_return, (int(self.width / 4), int(self.height * 0.1)))
-        self.surface.blit(self.intro_return, (self.width / 2.6, self.height * 0.85), (0, 0, self.width, self.height))
+        self.surface.blit(self.intro_bg2, (0, 0))
+        self.surface.blit(self.intro_choosecolour, (self.width / 3.9, self.height * 0.05))
+        self.surface.blit(self.intro_color4, (self.width / 2.6, self.height * 0.2))
+        self.surface.blit(self.intro_color1, (self.width / 2.6, self.height * 0.33))
+        self.surface.blit(self.intro_color5, (self.width / 2.6, self.height * 0.46))
+        self.surface.blit(self.intro_color3, (self.width / 2.6, self.height * 0.59))
+        self.surface.blit(self.intro_color2, (self.width / 2.6, self.height * 0.72))
+        self.surface.blit(self.intro_return, (self.width / 2.6, self.height * 0.85))
 
         for drawable in args:
             drawable.draw_on(self.surface)
@@ -135,12 +121,9 @@ class Board:
 
     #Draw Input Name field Menu
     def draw_input(self, word: str, x: int, y: int):
-        self.intro_bg2 = pg.transform.scale(self.intro_bg2, (self.width, self.height))
-        self.surface.blit(self.intro_bg2, (0, 0), (0, 0, self.width, self.height))
-        self.intro_entername = pg.transform.smoothscale(self.intro_entername, (int(self.width / 2), int(self.height * 0.1)))
-        self.surface.blit(self.intro_entername, (self.width / 3.9, self.height * 0.05), (0, 0, self.width, self.height))
-        self.intro_input = pg.transform.smoothscale(self.intro_input, (int(self.width / 3), int(self.height * 0.2)))
-        self.surface.blit(self.intro_input, (self.width / 3.0, self.height * 0.4), (0, 0, self.width, self.height))
+        self.surface.blit(self.intro_bg2, (0, 0))
+        self.surface.blit(self.intro_entername, (self.width / 3.9, self.height * 0.05))
+        self.surface.blit(self.intro_input, (self.width / 3.0, self.height * 0.4))
         text = self.menu_font.render("{}".format(word), True, MENU_FONT_COLOR)
         rect = text.get_rect()
         rect.center = x, y
@@ -148,12 +131,9 @@ class Board:
         return self.surface.blit(text, rect)
     
     def draw_input_address(self, word: str, x: int, y: int):
-        self.intro_bg2 = pg.transform.smoothscale(self.intro_bg2, (self.width, self.height))
-        self.surface.blit(self.intro_bg2, (0, 0), (0, 0, self.width, self.height))
-        self.intro_enteraddress = pg.transform.smoothscale(self.intro_enteraddress, (int(self.width / 2), int(self.height * 0.1)))
-        self.surface.blit(self.intro_enteraddress, (self.width / 3.9, self.height * 0.05), (0, 0, self.width, self.height))
-        self.intro_input = pg.transform.smoothscale(self.intro_input, (int(self.width / 3), int(self.height * 0.2)))
-        self.surface.blit(self.intro_input, (self.width / 3.0, self.height * 0.4), (0, 0, self.width, self.height))
+        self.surface.blit(self.intro_bg2, (0, 0))
+        self.surface.blit(self.intro_enteraddress, (self.width / 3.9, self.height * 0.05))
+        self.surface.blit(self.intro_input, (self.width / 3.0, self.height * 0.4))
         text = self.menu_font.render("{}".format(word), True, MENU_FONT_COLOR)
         rect = text.get_rect()
         rect.center = x, y
@@ -161,15 +141,11 @@ class Board:
         return self.surface.blit(text, rect)
         
     def draw_help(self, i):
-        #self.intro_help[i] = pg.transform.smoothscale(self.intro_help[i], (self.width, self.height))
-        self.intro_help[i] = pg.transform.scale(self.intro_help[i], (self.width, self.height))
-        self.surface.blit(self.intro_help[i], (0, 0), (0, 0, self.width, self.height))
+        self.surface.blit(self.intro_help[i], (0, 0))
         pg.display.update()
         
     def draw_credits(self):
-        #self.intro_credits = pg.transform.smoothscale(self.intro_credits, (self.width, self.height))
-        self.intro_credits = pg.transform.scale(self.intro_credits, (self.width, self.height))
-        self.surface.blit(self.intro_credits, (0, 0), (0, 0, self.width, self.height))
+        self.surface.blit(self.intro_credits, (0, 0))
         pg.display.update()
 
     def draw_pause(self):

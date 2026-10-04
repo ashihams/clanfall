@@ -21,12 +21,10 @@ class MenuCursor(Drawable, pg.sprite.Sprite):
         self.game = game
         self.width = width
         self.height = height
-        self.pic = None
-
+        pic_raw = pg.image.load(path.join(self.game.Menu_folder, "sel.png")).convert_alpha()
+        self.pic = pg.transform.smoothscale(pic_raw, (width, height))
 
     def animate(self, destination, area):
-        self.pic = pg.image.load(path.join(self.game.Menu_folder, "sel.png"))
-        self.pic = pg.transform.smoothscale(self.pic, (self.width, self.height))
         self.surface.blit(self.pic, destination, area)
 
 def quit_game():

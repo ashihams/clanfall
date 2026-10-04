@@ -301,10 +301,11 @@ def launch_game():
         return {"status": "already_running", "pid": pygame_process.pid}
 
     try:
-        main_py = Path(__file__).resolve().parent.parent / "main.py"
+        creation_flags = subprocess.CREATE_NEW_CONSOLE if sys.platform == "win32" else 0
         pygame_process = subprocess.Popen(
             [sys.executable, str(main_py), "--client"],
             cwd=str(main_py.parent),
+            creationflags=creation_flags,
         )
         _broadcast_event(f"Pygame Client launched (PID: {pygame_process.pid})", kind="system")
         return {"status": "launched", "pid": pygame_process.pid}
