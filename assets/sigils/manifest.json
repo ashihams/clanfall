@@ -1,0 +1,14 @@
+{
+  "CREW_VICTORY": {
+    "title": "Crew Victory",
+    "image": "crew_victory.svg"
+  },
+  "IMPOSTOR_VICTORY": {
+    "title": "Impostor Victory",
+    "image": "impostor_victory.svg"
+  },
+  "UNRESOLVED": {
+    "title": "Unresolved",
+    "image": "crew_victory.svg"
+  }
+}

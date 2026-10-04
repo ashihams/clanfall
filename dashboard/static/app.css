@@ -1,0 +1,60 @@
+:root {
+  --bg: #0a0d12; --panel: #11161e; --line: #222b37; --text: #dde5ee; --muted: #7a8899;
+  --accent: #5ad1ff; --danger: #ff4d5e; --ok: #4fdc8f; --warn: #ffc457;
+  --mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, -apple-system, Segoe UI, sans-serif; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+h1 { margin: 0; font: 700 22px var(--mono); letter-spacing: 4px; }
+.tag { color: var(--muted); font-size: 12px; }
+.brand { display: flex; gap: 14px; align-items: baseline; }
+.badges span { font: 11px var(--mono); border: 1px solid var(--line); border-radius: 3px; padding: 3px 7px; margin-left: 6px; color: var(--muted); }
+.badges span b { color: var(--text); font-weight: 600; }
+.controls { display: flex; gap: 10px; align-items: center; padding: 12px 20px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+select, button { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 4px; padding: 7px 12px; font: inherit; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: .4; cursor: default; }
+button.ghost { color: var(--warn); }
+main { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 14px; padding: 14px 20px; }
+.col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+.panel.grow { flex: 1; }
+h2 { margin: 0 0 10px; font: 600 12px var(--mono); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; }
+.muted { color: var(--muted); font-weight: 400; letter-spacing: 0; text-transform: none; }
+.mono { font-family: var(--mono); }
+.small { font-size: 11px; word-break: break-all; color: var(--muted); margin-top: 6px; }
+#feed { list-style: none; margin: 0; padding: 0; max-height: 640px; overflow-y: auto; font: 12.5px var(--mono); }
+#feed li { padding: 4px 0; border-bottom: 1px dashed #1a212b; display: flex; gap: 10px; }
+#feed li .t { color: var(--muted); min-width: 44px; text-align: right; }
+#feed li.sealed { color: #56606d; font-style: italic; }
+#feed li.report, #feed li.meeting_start { color: var(--warn); }
+#feed li.catch { color: var(--danger); font-weight: 700; }
+#feed li.fact { color: var(--accent); padding-left: 54px; font-size: 11.5px; }
+#feed li.game_over { color: var(--ok); font-weight: 700; }
+table { width: 100%; border-collapse: collapse; font: 11.5px var(--mono); }
+td { padding: 4px 6px; border-bottom: 1px solid #1a212b; word-break: break-all; }
+td.ok { color: var(--ok); } td.bad { color: var(--danger); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.stat { border: 1px solid var(--line); border-radius: 4px; padding: 8px; text-align: center; transition: background .4s; }
+.stat b { display: block; font: 700 22px var(--mono); }
+.stat span { font-size: 10.5px; color: var(--muted); }
+.stat.flash { background: #3a1015; }
+.card { border: 1px solid var(--accent); border-radius: 5px; padding: 10px; margin-bottom: 10px; }
+.card.contradiction { border-color: var(--danger); box-shadow: 0 0 18px #ff4d5e33; }
+.card .label { font: 700 11px var(--mono); letter-spacing: 1px; color: var(--accent); }
+.card.contradiction .label { color: var(--danger); }
+.card .score { font: 11px var(--mono); color: var(--muted); margin-top: 6px; }
+.facts { list-style: none; margin: 0; padding: 0; font-size: 12.5px; max-height: 260px; overflow-y: auto; }
+.facts li { padding: 5px 0; border-bottom: 1px solid #1a212b; }
+.facts li i { font: 10px var(--mono); color: var(--muted); font-style: normal; display: block; }
+#passport { margin: 0 20px 24px; display: grid; grid-template-columns: 180px 1fr 1fr; gap: 20px; }
+#passport img { width: 180px; height: 180px; border-radius: 6px; border: 1px solid var(--line); }
+#passport h3 { margin: 0 0 6px; font: 700 18px var(--mono); }
+#leaderboard { margin: 0 20px 24px; }
+#lb-optin { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 12px; }
+#lb-optin .done { color: var(--ok); font: 11.5px var(--mono); align-self: center; }
+.small-note { font-size: 12px; margin: 0; }
+.hidden { display: none !important; }
+svg text { font: 11px var(--mono); fill: var(--muted); }
+@media (max-width: 1100px) { main { grid-template-columns: 1fr; } #passport { grid-template-columns: 1fr; } }

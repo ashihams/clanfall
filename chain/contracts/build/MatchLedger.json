@@ -1,0 +1,353 @@
+{
+  "contractName": "MatchLedger",
+  "compiler": "solc-0.8.24",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ArrayLengthMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "CommitmentMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EmptyCommitments",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MatchAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MatchAlreadyFinalized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "MatchNotCommitted",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotAllSeatsRevealed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SeatAlreadyRevealed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SeatOutOfRange",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "eventLogHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "MatchFinalized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "seat",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "role",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "RoleVerified",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "playerCount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "RolesCommitted",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32[]",
+          "name": "commitments",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "commitRoles",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "seat",
+          "type": "uint256"
+        }
+      ],
+      "name": "getCommitment",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getEventLogHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getMatchPhase",
+      "outputs": [
+        {
+          "internalType": "enum MatchLedger.MatchPhase",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getMatchTimestamps",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "committedAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "revealedAt",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPlayerCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "seat",
+          "type": "uint256"
+        }
+      ],
+      "name": "isSeatRevealed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint8[]",
+          "name": "roles",
+          "type": "uint8[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "seats",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "bytes32[]",
+          "name": "salts",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "eventLogHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "revealAndFinalize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "matchId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint8",
+          "name": "role",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "seat",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "salt",
+          "type": "bytes32"
+        }
+      ],
+      "name": "verifyCommitment",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561000f575f80fd5b50610a8a8061001d5f395ff3fe608060405234801561000f575f80fd5b5060043610610090575f3560e01c80634a5638c0116100635780634a5638c01461012e578063604da6da1461014357806373a886e214610165578063ca5889ba14610178578063fe133c1b1461018b575f80fd5b80630375f1171461009457806310962dc8146100bc578063185f4646146100dd57806348c34f9b1461010c575b5f80fd5b6100a76100a2366004610844565b6101ca565b60405190151581526020015b60405180910390f35b6100cf6100ca36600461087c565b61027c565b6040519081526020016100b3565b6100ff6100eb36600461089c565b5f9081526020819052604090205460ff1690565b6040516100b391906108c7565b6100cf61011a36600461089c565b5f9081526020819052604090206004015490565b61014161013c366004610935565b6102df565b005b6100cf61015136600461089c565b5f9081526020819052604090206001015490565b61014161017336600461097d565b61042f565b6100a761018636600461087c565b6107b7565b6101b561019936600461089c565b5f90815260208190526040902060058101546006909101549091565b604080519283526020830191909152016100b3565b5f8481526020819052604081206002015483106101fa5760405163f2f3598960e01b815260040160405180910390fd5b6040516001600160f81b031960f886901b1660208201526021810184905260418101839052606181018690525f906081016040516020818303038152906040528051906020012090505f808781526020019081526020015f20600201848154811061026757610267610a20565b5f918252602090912001541495945050505050565b5f8281526020819052604081206002015482106102ac5760405163f2f3598960e01b815260040160405180910390fd5b5f8381526020819052604090206002018054839081106102ce576102ce610a20565b905f5260205f200154905092915050565b5f8381526020819052604081205460ff166002811115610301576103016108b3565b1461031f5760405163fc2bc70d60e01b815260040160405180910390fd5b5f81900361034057604051633175b2cf60e21b815260040160405180910390fd5b5f838152602081905260408120805460016001600160a81b0319909116336101000217811782558101839055426005820155905b828110156103ec578160020184848381811061039257610392610a20565b8354600180820186555f9586526020808720938102959095013592909101919091556003860180548083018255908552938390209284049092018054601f9094166101000a60ff0219909316909255919091019050610374565b5060408051838152426020820152339186917fc4b6b125e38739bd57b9740daf3df6528f2d533492da6aa207ed86218c6cf9b5910160405180910390a350505050565b5f88815260208190526040812090815460ff166002811115610453576104536108b3565b036104715760405163f78ad65b60e01b815260040160405180910390fd5b6002815460ff166002811115610489576104896108b3565b036104a757604051636283cd9760e11b815260040160405180910390fd5b86851415806104b65750848314155b156104d45760405163512509d360e11b815260040160405180910390fd5b5f5b858110156106ee575f8787838181106104f1576104f1610a20565b905060200201359050826002018054905081106105215760405163f2f3598960e01b815260040160405180910390fd5b82600301818154811061053657610536610a20565b905f5260205f2090602091828204019190069054906101000a900460ff161561057257604051634d86c5dd60e11b815260040160405180910390fd5b5f8a8a8481811061058557610585610a20565b905060200201602081019061059a9190610a34565b828888868181106105ad576105ad610a20565b905060200201358e6040516020016105ed949392919060f89490941b6001600160f81b031916845260018401929092526021830152604182015260610190565b60405160208183030381529060405280519060200120905083600201828154811061061a5761061a610a20565b905f5260205f200154811461064257604051635054097b60e01b815260040160405180910390fd5b600184600301838154811061065957610659610a20565b905f5260205f2090602091828204019190066101000a81548160ff021916908315150217905550818c7fba60dfda9be30e4f8a89643e5844eb361b96d56ebc1f323ff8b45d9008cfd2b98d8d878181106106b5576106b5610a20565b90506020020160208101906106ca9190610a34565b6040805160ff90921682524260208301520160405180910390a350506001016104d6565b505f5b60038201548110156107555781600301818154811061071257610712610a20565b905f5260205f2090602091828204019190069054906101000a900460ff1661074d57604051636dc1709360e11b815260040160405180910390fd5b6001016106f1565b5060048101829055805460ff1916600217815542600682018190556040805184815260208101929092528a917f1be47ce3cd3f6d029a0ee51a15ccf8e625f207dad5d2ed925319338326aedf74910160405180910390a2505050505050505050565b5f8281526020819052604081206003015482106107e75760405163f2f3598960e01b815260040160405180910390fd5b5f83815260208190526040902060030180548390811061080957610809610a20565b905f5260205f2090602091828204019190069054906101000a900460ff16905092915050565b803560ff8116811461083f575f80fd5b919050565b5f805f8060808587031215610857575f80fd5b843593506108676020860161082f565b93969395505050506040820135916060013590565b5f806040838503121561088d575f80fd5b50508035926020909101359150565b5f602082840312156108ac575f80fd5b5035919050565b634e487b7160e01b5f52602160045260245ffd5b60208101600383106108e757634e487b7160e01b5f52602160045260245ffd5b91905290565b5f8083601f8401126108fd575f80fd5b50813567ffffffffffffffff811115610914575f80fd5b6020830191508360208260051b850101111561092e575f80fd5b9250929050565b5f805f60408486031215610947575f80fd5b83359250602084013567ffffffffffffffff811115610964575f80fd5b610970868287016108ed565b9497909650939450505050565b5f805f805f805f8060a0898b031215610994575f80fd5b88359750602089013567ffffffffffffffff808211156109b2575f80fd5b6109be8c838d016108ed565b909950975060408b01359150808211156109d6575f80fd5b6109e28c838d016108ed565b909750955060608b01359150808211156109fa575f80fd5b50610a078b828c016108ed565b999c989b50969995989497949560800135949350505050565b634e487b7160e01b5f52603260045260245ffd5b5f60208284031215610a44575f80fd5b610a4d8261082f565b939250505056fea2646970667358221220a572a0b4ad28a1a1aec0e872e1794f2c864529f7b1818db5a40650557d5155c764736f6c63430008180033"
+}

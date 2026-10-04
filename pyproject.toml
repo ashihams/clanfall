@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clanfall"
+version = "0.1.0"
+description = "Pluggable match-memory engine for social-deduction games: hybrid memory that wipes every match, with commit-reveal on-chain proofs"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
+    "pydantic>=2.6.0",
+    "pyyaml>=6.0.1",
+    "python-dotenv>=1.0",
+    "networkx>=3.2.1",
+    "langgraph>=0.2.0",
+    "httpx>=0.27.0",
+    "tcvectordb>=2.1.0",
+    "pinecone>=5.4.0",
+    "chromadb>=0.5.0",
+    "neo4j>=5.18",
+    "pymongo>=4.6",
+    "eth-account>=0.13.0",
+    "eth-hash[pycryptodome]>=0.7.0",
+]
+
+[project.optional-dependencies]
+chain = [
+    "web3>=7.0.0",
+    "eth-tester[py-evm]>=0.12.0b1",
+    "py-solc-x>=2.0.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "mongomock>=4.1",
+]
+
+[tool.setuptools.packages.find]
+include = ["agents*", "api*", "chain*", "config*", "llm*", "memory*", "orchestration*", "simulation*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

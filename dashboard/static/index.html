@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clanfall — Match-Memory Engine</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>CLANFALL</h1>
+      <span class="tag">match-memory engine · episodic → semantic → graph · forgets every match</span>
+    </div>
+    <div id="health" class="badges"></div>
+  </header>
+
+  <section class="controls">
+    <select id="scenario"></select>
+    <button id="btn-start">1 · Commit roles &amp; start</button>
+    <button id="btn-step" disabled>Step</button>
+    <button id="btn-play" disabled>▶ Auto-play</button>
+    <button id="btn-reset" class="ghost">Wipe memory</button>
+    <span id="scenario-desc" class="muted"></span>
+  </section>
+
+  <main>
+    <div class="col">
+      <div class="panel">
+        <h2>Map <span class="muted" id="clock">t = 0s</span></h2>
+        <svg id="map" viewBox="0 0 420 300"></svg>
+      </div>
+      <div class="panel">
+        <h2>Role commitments <span class="muted" id="ledger-mode"></span></h2>
+        <table id="commitments"><tbody><tr><td class="muted">Start a match to commit roles before play.</td></tr></tbody></table>
+        <div id="commit-tx" class="mono small"></div>
+      </div>
+    </div>
+
+    <div class="col wide">
+      <div class="panel grow">
+        <h2>Event feed</h2>
+        <ol id="feed"></ol>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="panel">
+        <h2>Memory <span class="muted" id="vector-engine"></span></h2>
+        <div id="stats" class="stats"></div>
+      </div>
+      <div class="panel">
+        <h2>Meeting evidence</h2>
+        <div id="evidence"><p class="muted">Evidence appears when a meeting opens.</p></div>
+      </div>
+      <div class="panel">
+        <h2>Derived facts</h2>
+        <ul id="facts" class="facts"><li class="muted">None yet.</li></ul>
+      </div>
+    </div>
+  </main>
+
+  <section id="passport" class="panel hidden"></section>
+
+  <section id="leaderboard" class="panel">
+    <h2>Opt-in leaderboard <span class="muted" id="lb-mode"></span></h2>
+    <p class="muted small-note">Separate from match memory, which is wiped every match. Nothing is published unless a
+      player chooses to: their own wallet sends the transaction, carrying a host-signed result.</p>
+    <div id="lb-optin"></div>
+    <table id="lb-table"><tbody><tr><td class="muted">No one has opted in yet.</td></tr></tbody></table>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

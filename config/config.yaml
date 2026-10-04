@@ -1,0 +1,42 @@
+# Clanfall configuration — defaults only.
+# Secrets (Tencent keys, chain private key, Groq key) belong in .env.
+
+system:
+  app_name: "Clanfall Match-Memory Engine"
+  version: "0.1.0"
+  log_level: "INFO"
+
+memory:
+  hybrid_weights:
+    vector_similarity: 0.6
+    graph_relevance: 0.4
+  top_k_facts: 5
+  embedding_dim: 64
+  vector_backend: "auto"   # auto | tencent | chroma | memory
+  chroma_collection: "clanfall_match_facts"
+  tencent:
+    database: "clanfall"
+    collection: "match_facts"
+    timeout_s: 10
+
+rules:
+  near_body_window_s: 20.0
+  last_seen_window_s: 30.0
+
+chain:
+  mode: "mock"             # mock | testnet
+  chain_id: 84532          # Base Sepolia
+  explorer_tx_url: "https://sepolia.basescan.org/tx/"
+
+llm:
+  groq_enabled: true
+  groq_model: "openai/gpt-oss-20b"
+  groq_base_url: "https://api.groq.com/openai/v1"
+  groq_timeout_seconds: 8.0
+  groq_connect_timeout_seconds: 2.0
+
+api:
+  host: "127.0.0.1"
+  port: 8000
+
+passport_dir: "data/passports"

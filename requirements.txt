@@ -1,0 +1,24 @@
+fastapi>=0.110.0
+uvicorn>=0.28.0
+pydantic>=2.6.0
+pyyaml>=6.0.1
+python-dotenv>=1.0
+networkx>=3.2.1
+langgraph>=0.2.0
+httpx>=0.27.0
+pytest>=8.0.0
+# vector stores: Tencent Cloud VectorDB (primary), Pinecone (if Tencent isn't configured), Chroma (local)
+tcvectordb>=2.1.0
+pinecone>=5.4.0
+chromadb>=0.5.0
+# knowledge graph (Neo4j Aura / self-hosted) + document store for match memory (MongoDB)
+neo4j>=5.18
+pymongo>=4.6
+mongomock>=4.1
+# chain: wallets, signatures, keccak, MatchLedger client
+eth-account>=0.13.0
+eth-hash[pycryptodome]>=0.7.0
+web3>=7.0.0
+# local EVM for tests + contract compilation
+eth-tester[py-evm]>=0.12.0b1
+py-solc-x>=2.0.0
