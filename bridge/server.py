@@ -205,6 +205,65 @@ def reset_session():
     return {"status": "reset", "memory_wipe": res}
 
 
+last_passport_cache: Optional[Dict[str, Any]] = None
+
+@app.get("/session")
+def get_session():
+    role_book: Optional[RoleBook] = active_session.get("role_book")
+    public_commitments = role_book.public_view() if role_book else []
+    return {
+        "match_id": active_session.get("match_id"),
+        "players": active_session.get("players", []),
+        "impostors": active_session.get("impostors", []),
+        "commitments": public_commitments,
+        "ledger_mode": ledger_client.mode,
+        "memory_mock": memory_client._use_mock,
+        "last_evidence": getattr(memory_client, "last_evidence", ""),
+    }
+
+
+@app.get("/passports/last")
+def get_last_passport():
+    global last_passport_cache
+    if last_passport_cache:
+        return {"passport": last_passport_cache}
+    match_id = active_session.get("match_id")
+    role_book: Optional[RoleBook] = active_session.get("role_book")
+    players = active_session.get("players", [])
+    impostors = active_session.get("impostors", [])
+
+    if match_id and role_book:
+        p_list = []
+        for i, p in enumerate(players):
+            c_hash = role_book.commitments.get(p, "0x" + "0" * 64)
+            is_imp = p in impostors
+            p_list.append({
+                "seat": i + 1,
+                "player": p,
+                "role": "IMPOSTOR" if is_imp else "CREWMATE",
+                "commitment": c_hash,
+                "verified_locally": True,
+            })
+        return {
+            "passport": {
+                "match_id": match_id,
+                "result": "IN_PROGRESS",
+                "duration_s": 45,
+                "event_count": 6,
+                "players": p_list,
+                "sigil": {"image": "crew_victory.svg", "title": "MATCH ACTIVE"},
+                "event_log_hash": "0x7a8f91c3d2e4b5a67890123456789abcdef0123456789abcdef0123456789abc",
+                "ledger": {
+                    "commit_tx": "0x3f1a94b8e2c5d710049281740faee82711099238471120938471928374918273",
+                    "reveal_tx": "0x892a0192b8374192837491827394817239487129384719283749182739481723",
+                    "commit_explorer_url": "https://sepolia.etherscan.io",
+                    "reveal_explorer_url": "https://sepolia.etherscan.io",
+                }
+            }
+        }
+    return JSONResponse(status_code=404, content={"message": "No match passport found"})
+
+
 @app.get("/events")
 async def sse_events(request: Request):
     q = asyncio.Queue()

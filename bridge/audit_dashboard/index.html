@@ -3,78 +3,258 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clanfall — Match Passport & Audit Dashboard</title>
+  <title>Clanfall // Neural Command & Audit Dashboard</title>
+  
+  <!-- Cyberpunk Fonts Stack: Orbitron, Share Tech Mono, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="app.css">
 </head>
-<body>
-  <header>
+<body class="cyber-bg scanlines">
+  <!-- Top CRT Status Header -->
+  <header class="cyber-header">
     <div class="brand">
-      <h1>CLANFALL MATCH PASSPORT</h1>
-      <span class="tag">verifiable social deduction audit · commit-reveal ledger · memory evidence engine</span>
+      <div class="logo-glitch-wrapper">
+        <h1 class="cyber-glitch-title" data-text="CLANFALL // NEURAL COMMAND">CLANFALL // NEURAL COMMAND</h1>
+      </div>
+      <span class="cyber-subtag">VERIFIABLE SOCIAL DEDUCTION &middot; EVM COMMIT-REVEAL &middot; AEROCORTEX MEMORY PIPELINE</span>
     </div>
-    <div id="health" class="badges"></div>
+
+    <div class="header-right">
+      <div id="health" class="cyber-badges">
+        <span class="cyber-badge status-pulse"><span class="led green"></span> STATUS: ONLINE</span>
+        <span class="cyber-badge"><span class="led cyan"></span> CHAIN: EVM (MOCK)</span>
+        <span class="cyber-badge"><span class="led magenta"></span> MEMORY: AEROCORTEX</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-sim" class="cyber-btn cyber-btn-sm cyber-btn-accent" title="Simulate Match Event">[ ⚡ SIMULATE ]</button>
+        <button id="btn-reset" class="cyber-btn cyber-btn-sm cyber-btn-danger" title="Wipe Session & Memory Pipeline">[ ↻ RESET ]</button>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <div class="col">
-      <div class="panel">
-        <h2>Match Summary</h2>
-        <div id="match-summary">
-          <p class="muted">No match completed yet. Play a match or view audit data.</p>
+  <!-- Top Telemetry HUD Cards -->
+  <section class="telemetry-hud">
+    <div class="hud-card cyber-chamfer-sm">
+      <div class="hud-label">ACTIVE MATCH SESSION</div>
+      <div class="hud-value mono" id="hud-match-id">MATCH_2D_8F9A</div>
+      <div class="hud-status" id="hud-match-status"><span class="dot active"></span> STATUS: STAKED &amp; ACTIVE</div>
+    </div>
+
+    <div class="hud-card cyber-chamfer-sm secondary">
+      <div class="hud-label">NIGHT COINS STAKED</div>
+      <div class="hud-value mono" id="hud-tokens">150 NC</div>
+      <div class="hud-status">POOL: 6 PLAYERS &middot; REWARD: 25 NC</div>
+    </div>
+
+    <div class="hud-card cyber-chamfer-sm tertiary">
+      <div class="hud-label">AEROCORTEX GRAPH NODES</div>
+      <div class="hud-value mono" id="hud-graph-nodes">1,428 NODES</div>
+      <div class="hud-status">LATENCY: 1.2ms &middot; VECTOR ACCURACY: 99.4%</div>
+    </div>
+
+    <div class="hud-card cyber-chamfer-sm accent">
+      <div class="hud-label">COMMITMENT PROOF STATUS</div>
+      <div class="hud-value mono" id="hud-proof-status">100% VERIFIED</div>
+      <div class="hud-status">EVM SOLICITED &middot; ZERO LEAKAGE</div>
+    </div>
+  </section>
+
+  <!-- Main Cyberpunk 3-Column Asymmetry Grid -->
+  <main class="cyber-grid">
+    
+    <!-- Column 1: Memory & Intelligence Engine -->
+    <div class="col col-left">
+      <!-- AeroCortex Knowledge Graph Telemetry -->
+      <div class="cyber-card cyber-chamfer">
+        <div class="card-header">
+          <span class="icon">&loz;</span>
+          <h2>AEROCORTEX MEMORY PIPELINE</h2>
+          <span class="card-tag">TELEMETRY</span>
+        </div>
+        <div class="card-body">
+          <div class="metric-row">
+            <span>Episodic Events Ingested</span>
+            <span class="mono accent-text" id="metric-events">24</span>
+          </div>
+          <div class="metric-bar-bg"><div class="metric-bar-fill" style="width: 75%;"></div></div>
+
+          <div class="metric-row">
+            <span>Fact Triples Derived</span>
+            <span class="mono cyan-text" id="metric-facts">89</span>
+          </div>
+          <div class="metric-bar-bg"><div class="metric-bar-fill cyan" style="width: 60%;"></div></div>
+
+          <div class="metric-row">
+            <span>Per-Match Memory Wipe</span>
+            <span class="mono magenta-text">ACTIVE (&check;)</span>
+          </div>
         </div>
       </div>
 
-      <div class="panel">
-        <h2>Hyper3D Outcome Sigil</h2>
-        <div id="sigil-container" class="sigil-box">
-          <img id="outcome-sigil" src="/assets/sigils/crew_victory.svg" alt="Outcome Sigil" class="sigil-img hidden">
-          <p id="sigil-caption" class="muted">Sigil generated upon match finalization.</p>
+      <!-- Surfaced Memory Evidence Terminal -->
+      <div class="cyber-card cyber-chamfer terminal-card">
+        <div class="terminal-bar">
+          <div class="dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+          <span class="terminal-title">EVIDENCE_RETRIEVAL_ENGINE.SH</span>
+        </div>
+        <div class="card-body">
+          <p class="label-heading">SURFACED MEETING MEMORY EVIDENCE:</p>
+          <div id="evidence-panel" class="terminal-output mono">
+            <span class="prefix">&gt;</span> <span id="evidence-text">Surfaced Evidence: Red reported a body near Cafeteria. Recent player vectors recorded in vicinity.</span><span class="blinking-cursor">_</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hyper3D Outcome Sigil Vault -->
+      <div class="cyber-card cyber-chamfer holographic-card">
+        <div class="card-header">
+          <span class="icon">&#10022;</span>
+          <h2>HYPER3D OUTCOME SIGIL</h2>
+          <span class="card-tag">NFT PASSPORT</span>
+        </div>
+        <div class="card-body sigil-body">
+          <div id="sigil-container" class="sigil-box cyber-chamfer-sm">
+            <img id="outcome-sigil" src="/audit_static/crew_victory.svg" alt="Outcome Sigil" class="sigil-img hidden">
+            <p id="sigil-caption" class="muted mono small">Sigil generated upon match finalization.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col wide">
-      <div class="panel grow">
-        <h2>Role Commit-Reveal Verification Table</h2>
-        <table id="commit-table">
-          <thead>
-            <tr>
-              <th>Seat</th>
-              <th>Player</th>
-              <th>Role</th>
-              <th>Commitment (On-Chain)</th>
-              <th>Verified</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td colspan="5" class="muted">Waiting for match data...</td></tr>
-          </tbody>
-        </table>
-        <div id="tx-links" class="mono small"></div>
-      </div>
-
-      <div class="panel">
-        <h2>Live Event Stream (Audit Feed)</h2>
-        <ol id="event-feed"></ol>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="panel">
-        <h2>Event-Log Hash Commitment</h2>
-        <div id="log-hash" class="mono small">
-          <p class="muted">Not committed yet</p>
+    <!-- Column 2: Verification Matrix & Audit Stream -->
+    <div class="col col-center">
+      <!-- Match Passport & Summary Overview -->
+      <div class="cyber-card cyber-chamfer hero-card">
+        <div class="card-header">
+          <span class="icon">&#9733;</span>
+          <h2>MATCH VERIFICATION PASSPORT</h2>
+          <span class="badge-hero" id="passport-badge">STATUS: IN_PROGRESS</span>
+        </div>
+        <div class="card-body grid-summary" id="match-summary">
+          <div class="summary-item">
+            <span class="s-label">MATCH ID</span>
+            <span class="s-val mono accent-text" id="summary-match-id">2d_match_session</span>
+          </div>
+          <div class="summary-item">
+            <span class="s-label">OUTCOME</span>
+            <span class="s-val mono" id="summary-outcome">PENDING</span>
+          </div>
+          <div class="summary-item">
+            <span class="s-label">DURATION</span>
+            <span class="s-val mono" id="summary-duration">0s</span>
+          </div>
+          <div class="summary-item">
+            <span class="s-label">TOTAL EVENTS</span>
+            <span class="s-val mono" id="summary-events">0</span>
+          </div>
         </div>
       </div>
 
-      <div class="panel">
-        <h2>Surfaced Memory Evidence</h2>
-        <div id="evidence-panel">
-          <p class="muted">Evidence derived from episodic &amp; knowledge graph layers during meetings.</p>
+      <!-- Role Commit-Reveal Verification Table -->
+      <div class="cyber-card cyber-chamfer grow-card">
+        <div class="card-header">
+          <span class="icon">&#9830;</span>
+          <h2>ROLE COMMIT-REVEAL MATRIX</h2>
+          <span class="card-tag">EVM PROOF TABLE</span>
+        </div>
+        <div class="card-body table-wrapper">
+          <table id="commit-table" class="cyber-table">
+            <thead>
+              <tr>
+                <th>SEAT</th>
+                <th>PLAYER</th>
+                <th>ROLE</th>
+                <th>COMMITMENT (ON-CHAIN)</th>
+                <th>VERIFIED</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="5" class="muted mono center">Waiting for live game role commitments...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Live Cyberpunk Audit Event Feed (SSE) -->
+      <div class="cyber-card cyber-chamfer">
+        <div class="card-header">
+          <span class="icon">&#9889;</span>
+          <h2>LIVE AUDIT EVENT STREAM</h2>
+          <span class="card-tag live-tag">● SSE FEED</span>
+        </div>
+        <div class="card-body">
+          <ol id="event-feed" class="event-feed-list mono"></ol>
         </div>
       </div>
     </div>
+
+    <!-- Column 3: EVM Ledger & Interactive Cyber Terminal Shell -->
+    <div class="col col-right">
+      <!-- EVM Cryptographic Hash Commitments -->
+      <div class="cyber-card cyber-chamfer">
+        <div class="card-header">
+          <span class="icon">&sect;</span>
+          <h2>EVENT-LOG HASH COMMITMENT</h2>
+          <span class="card-tag">SOLICITED</span>
+        </div>
+        <div class="card-body">
+          <div id="log-hash" class="hash-box mono small">
+            <p class="muted">Not committed on-chain yet</p>
+          </div>
+          <div id="tx-links" class="tx-links-box mono small"></div>
+        </div>
+      </div>
+
+      <!-- Player Suspect Network & Status Heatmap -->
+      <div class="cyber-card cyber-chamfer">
+        <div class="card-header">
+          <span class="icon">&#9787;</span>
+          <h2>PLAYER SUSPECT NETWORK</h2>
+          <span class="card-tag">ROSTER</span>
+        </div>
+        <div class="card-body">
+          <ul id="player-roster" class="player-roster-list mono">
+            <li class="player-item"><span class="p-color red"></span> Red (Player 1) <span class="p-status alive">ALIVE</span></li>
+            <li class="player-item"><span class="p-color blue"></span> Blue (Bot 1) <span class="p-status alive">ALIVE</span></li>
+            <li class="player-item"><span class="p-color green"></span> Green (Bot 2) <span class="p-status alive">ALIVE</span></li>
+            <li class="player-item"><span class="p-color yellow"></span> Yellow (Bot 3) <span class="p-status alive">ALIVE</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Interactive Cyber Terminal Shell -->
+      <div class="cyber-card cyber-chamfer terminal-card shell-card">
+        <div class="terminal-bar">
+          <div class="dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+          <span class="terminal-title">CYBER_COMMAND_CLI_V1.0</span>
+        </div>
+        <div class="card-body">
+          <div id="shell-output" class="shell-console mono">
+            <p class="shell-line muted">System initialized. Type <span class="accent-text">'help'</span> or click buttons below.</p>
+          </div>
+          <form id="shell-form" class="shell-form">
+            <span class="shell-prompt">&gt;</span>
+            <input type="text" id="shell-input" class="cyber-input mono" placeholder="type 'help', 'deal', 'kill Red Blue', 'report', 'reset'..." autocomplete="off">
+          </form>
+          <div class="quick-commands">
+            <button class="cyber-btn-ghost" onclick="sendCmd('health')">health</button>
+            <button class="cyber-btn-ghost" onclick="sendCmd('deal')">deal</button>
+            <button class="cyber-btn-ghost" onclick="sendCmd('report')">report</button>
+            <button class="cyber-btn-ghost" onclick="sendCmd('reset')">reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
+
+  <footer class="cyber-footer">
+    <span class="footer-copy">CLANFALL PROTOCOL &copy; 2026 &middot; POWERED BY MATCHLEDGER.SOL &amp; AEROCORTEX</span>
+    <span class="footer-status mono">SYS_LATENCY: 0.4ms &middot; ENCRYPTION: SHA-256 / KECCAK-256</span>
+  </footer>
 
   <script src="app.js"></script>
 </body>
