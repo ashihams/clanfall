@@ -22,3 +22,5 @@ web3>=7.0.0
 # local EVM for tests + contract compilation
 eth-tester[py-evm]>=0.12.0b1
 py-solc-x>=2.0.0
+pygame>=2.5.0
+pytmx>=3.31

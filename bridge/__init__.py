@@ -1,0 +1,3 @@
+"""
+Clanfall Python Bridge Package
+"""
